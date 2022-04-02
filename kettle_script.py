@@ -21,3 +21,4 @@ def testing(pin):
         time.sleep(10)
     GPIO.cleanup()
 
+testing()
