@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import sys
 
 # Use standard pinout
 GPIO.setmode(GPIO.BOARD)
@@ -21,4 +22,4 @@ def testing(pin):
         time.sleep(10)
     GPIO.cleanup()
 
-testing()
+testing(sys.argv[1])
