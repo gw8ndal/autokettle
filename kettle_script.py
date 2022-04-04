@@ -22,4 +22,4 @@ def testing(pin):
         time.sleep(10)
     GPIO.cleanup()
 
-testing(sys.argv[1])
+testing(int(sys.argv[1]))

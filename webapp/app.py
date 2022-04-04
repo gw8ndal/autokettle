@@ -40,29 +40,13 @@ def heat():
             userdata_list = userdata_file.read().split('\n')
             print(userdata_list)
             print('avec fichier')
-            ssh_connection = paramiko.SSHClient()
-            ssh_connection.load_system_host_keys()
-            ssh_connection.connect(userdata_list[1], username=userdata_list[2], password=userdata_list[3]) # Connect to the raspberry pi
-            
-            with SCPClient(ssh_connection.get_transport()) as scp: # Copy requirements file and the python script to the raspberry pi
-                scp.put('../kettle_script.py', '/tmp')
-                scp.put('kettle_reqs.txt', '/tmp')
-            
-            stdin, stdout, stderr = ssh_connection.exec_command(f'cd /tmp ; python3 -m pip install -r kettle_reqs.txt ; python3 kettle_script.py {userdata_list[0]}') # Install requirements and execute the script with the selected pin
-            print(stdout)
+
+            os.system(f'python ../kettle_script.py {userdata_list[0]}')
 
         except: # Run program without the data file, directly from the form
             print('sans fichier')
-            ssh_connection = paramiko.SSHClient()
-            ssh_connection.load_system_host_keys()
-            ssh_connection.connect(data.raspy_ip, username=data.raspy_user, password=data.raspy_pass) # Connect to the raspberry pi
-            
-            with SCPClient(ssh_connection.get_transport()) as scp:   
-                scp.put('../kettle_script.py', '/tmp')
-                scp.put('kettle_reqs.txt', '/tmp')
-            
-            stdin, stdout, stderr = ssh_connection.exec_command(f'cd /tmp ; python3 -m pip install -r kettle_reqs.txt ; python3 kettle_script.py {data.raspy_pin}') # Install requirements and execute the script with the selected pin
-            print(stdout)
+
+            os.system(f'python ../kettle_script.py{data.raspy_pin}')
 
         return redirect('/')
     if request.method == 'POST':
