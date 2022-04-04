@@ -1,7 +1,4 @@
-from crypt import methods
-from flask import Flask, render_template, request, redirect, flash
-import paramiko # Module to connect to SSH in python
-from scp import SCPClient # Module to upload files via SSH
+from flask import Flask, render_template, request, redirect
 import os
 
 app = Flask(__name__)
@@ -18,13 +15,10 @@ def data():
         data.req = request.form # Get web form request data
 
         data.raspy_pin = data.req['GPIO_pin']
-        data.raspy_ip = data.req['raspy_ip']
-        data.raspy_user = data.req['raspy_user']
-        data.raspy_pass = data.req['raspy_pass']
 
         if 'filesave_toggle' in data.req: # Check if the box was checked
             userdata_file = open('userdata.txt', 'w+') # Open the userdata file
-            userdata_file.writelines([f'{data.raspy_pin}\n', f'{data.raspy_ip}\n', f'{data.raspy_user}\n', f'{data.raspy_pass}\n']) # Write content to the file
+            userdata_file.writelines([f'{data.raspy_pin}']) # Write content to the file
             userdata_file.close()
         else:
             os.remove('userdata.txt')
@@ -37,7 +31,7 @@ def heat():
         try: # Run program with data from the saved file
 
             userdata_file = open('userdata.txt', 'r')
-            userdata_list = userdata_file.read().split('\n')
+            userdata_list = userdata_file.read()
             print(userdata_list)
             print('avec fichier')
 
