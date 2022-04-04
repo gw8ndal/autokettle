@@ -12,6 +12,7 @@
 
             <form action="/data" method = "POST">
                 <p>GPIO pin to use <input type="text" name="GPIO_pin", placeholder="1-40" required=True/></p>
+                <p>Water temperature<br>30°C<input type="range" min="30" max="100" value="80" name="kettle_temp" id="kettle_temp">100°C</p>
                 <p>Store data in a file for later use<input type="checkbox" name="filesave_toggle"></p>
                 <h5>Warning : Userdata will be removed if you submit the form without checking the box</h6>
                 <p><input type="submit" value="Submit"/></p>
