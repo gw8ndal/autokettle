@@ -12,16 +12,19 @@ def testing(pin, temp):
     temp : wanted temperature (TBD)
     """
     assert 0 < pin <= 40
+
     GPIO.setup(pin, GPIO.OUT)
-    while True:
-        # Enable GPIO 25
-        GPIO.output(pin, True)
-        print('on')
-        time.sleep(10)
-        # Disable GPIO 25
-        GPIO.output(pin, False)
-        print('off')
-        time.sleep(10)
+    
+    # Enable GPIO 25
+    GPIO.output(pin, True)
+    print('on')
+    
+    time.sleep(10)
+    
+    # Disable GPIO 25
+    GPIO.output(pin, False)
+    print('off')
+    
     GPIO.cleanup()
 
 testing(int(sys.argv[1]), int(sys.argv[2]))
