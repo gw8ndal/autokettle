@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request, redirect
+from flask_socketio import SocketIO, send, emit
 import os
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'Hce5-e9kpr8eb7J'
+socketio = SocketIO(app)
 
 @app.route('/')
 def index():
@@ -49,3 +52,11 @@ def heat():
         return redirect('/')
     if request.method == 'POST':
         return redirect('/')
+
+
+@socketio.on('send_temp')
+def handle_send(message):
+    send(message)
+
+if __name__ == '__main__': # Run the server with SocketIO
+    socketio.run(app, host='0.0.0.0') 
