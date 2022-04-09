@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>AUTO KETTLE</title>
+        <link rel="icon" type="image/x-icon" href="/webapp/imgs/favicon.ico">
     </head>
 
     <body>
@@ -28,7 +29,7 @@
         <script type="text/javascript" charset="utf-8">
             var socket = io();
             socket.on('connect', function() {
-                socket.emit('my event', {data: 'I\'m connected!'});
+                socket.emit('client_connected', {data: 'I\'m connected!'});
             });
         </script>
     </body>
