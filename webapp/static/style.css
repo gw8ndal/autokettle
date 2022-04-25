@@ -1,9 +1,3 @@
-:root {
-  --primary-color: #4e525d;
-  --overlay-color: rgba(24, 39, 51 , 0.85);
-  --menu-speed: 0.75s;
-}
-
 /* 
 colors :
     - yellow : #f5ab0e
@@ -15,7 +9,7 @@ colors :
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--primary-color);
+  background-color: #4e525d;
   font-family: "Archivo Black", sans-serif;
 }
 
@@ -43,10 +37,10 @@ body {
   top: 0;
   right: 0;
   z-index: 1;
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   padding: 1rem;
-  background: var(--primary-color);
+  background: #4e525d;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,7 +100,8 @@ body {
 
 .form-menu .toggler:checked ~ .form > div {
   transform: scale(1);
-  transition-duration: var(--menu-speed);
+  transition-duration: 0.75s;
+  visibility: visible;
 }
 
 .form-menu .toggler:checked ~ .form > div > div {
@@ -116,18 +111,23 @@ body {
 
 .form-menu .form {
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 30%;
+  left: 70%;
   width: 100%;
   height: 100%;
   visibility: hidden;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+  /* align-items: center; */
+  /* justify-content: center; */
+  transition: all 0.4s ease;
 }
 
-.form-menu .form > div {
+.form-menu form {
+  color: #fff;
+}
+
+/* .form-menu .form > div {
   background: var(--overlay-color);
   border-radius: 50%;
   width: 200vw;
@@ -139,24 +139,41 @@ body {
   transform: translate(50vw, -50vh);
   transform: scale(0);
   transition: all 0.4s ease;
-}
+} */
 
-.form-menu .form > div > div {
+/* .form-menu .form > div > div {
   text-align: center;
   max-width: 90vw;
   max-height: 100vh;
   opacity: 0;
   transition: opacity 0.4s ease;
-}
+} */
 
 
 
 /* Main  */
 .title {
+  position: absolute;
+  top: 22%;
+  left: 12%;
   display: inline-block;
-  background-image: linear-gradient(to right, #fff 0 42%,#f5ab0e 42% 100%);
+  background-image: linear-gradient(to right, #fff 0 42%, #f5ab0e 42% 100%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 6rem;
   text-transform: uppercase;
+}
+
+.heat_button {
+  position: absolute;
+  top: 45%;
+  left: 26.5%;
+  padding: 5px 15px;
+  font-size: 3rem;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  background: #f5ab0e; 
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
+  cursor: pointer;
 }
