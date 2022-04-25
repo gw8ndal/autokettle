@@ -1,40 +1,162 @@
-#wrap {
-    font-family: sans-serif;
-    font-size: 21px;
-    line-height: 1.6;
-    margin: 0;
-    display: flex;
-    color: #f00;
-    transition: transform .4s cubic-bezier(.25, .1, .25, 1);
-  }
-  
-  #wrap:not(:target) {
-    transform: translate3d(-335px, 0, 0);
-  }
-  
-  #wrap:target {
-    transform: translate3d(0, 0, 0);
-  }
-  
-  #open,
-  #close {
-    height: 44px;
-    text-align: right;
-    display: block;
-    margin-right: -30px;
-  }
-  
-  #wrap:target #open,
-  #wrap:not(:target) #close {
-    display: none;
-  }
-  
-  #wrap:target #open {
-    display: none;
-  }
-  
-  .nav a {
-    color: white;
-    text-decoration: none;
-    display: block;
-  }
+:root {
+  --primary-color: #4e525d;
+  --overlay-color: rgba(24, 39, 51 , 0.85);
+  --menu-speed: 0.75s;
+}
+
+/* 
+colors :
+    - yellow : #f5ab0e
+    - darkgrey : #4e525d
+    - bluenavy : #687389
+    - lightgrey : #b5b8bf
+*/
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--primary-color);
+  font-family: "Archivo Black", sans-serif;
+}
+
+/* MENU STYLES */
+.form-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.form-menu .toggler {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+}
+
+.form-menu .hamburger {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  width: 60px;
+  height: 60px;
+  padding: 1rem;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hamburger Line */
+.form-menu .hamburger > div {
+  position: relative;
+  flex: none;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+/* Hamburger Lines - Top & Bottom */
+.form-menu .hamburger > div::before,
+.form-menu .hamburger > div::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: -10px;
+  width: 100%;
+  height: 2px;
+  background: inherit;
+}
+
+/* Moves Line Down */
+.form-menu .hamburger > div::after {
+  top: 10px;
+}
+
+/* Toggler Animation */
+.form-menu .toggler:checked + .hamburger > div {
+  transform: rotate(135deg);
+}
+
+/* Turns Lines Into X */
+.form-menu .toggler:checked + .hamburger > div:before,
+.form-menu .toggler:checked + .hamburger > div:after {
+  top: 0;
+  transform: rotate(90deg);
+}
+
+/* Rotate On Hover When Checked */
+.form-menu .toggler:checked:hover + .hamburger > div {
+  transform: rotate(225deg);
+}
+
+/* Show Menu */
+.form-menu .toggler:checked ~ .form {
+  visibility: visible;
+}
+
+.form-menu .toggler:checked ~ .form > div {
+  transform: scale(1);
+  transition-duration: var(--menu-speed);
+}
+
+.form-menu .toggler:checked ~ .form > div > div {
+  opacity: 1;
+  transition:  opacity 0.4s ease 0.4s;
+}
+
+.form-menu .form {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-menu .form > div {
+  background: var(--overlay-color);
+  border-radius: 50%;
+  width: 200vw;
+  height: 200vw;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  transform: translate(50vw, -50vh);
+  transform: scale(0);
+  transition: all 0.4s ease;
+}
+
+.form-menu .form > div > div {
+  text-align: center;
+  max-width: 90vw;
+  max-height: 100vh;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+
+
+/* Main  */
+.title {
+  display: inline-block;
+  background-image: linear-gradient(to right, #fff 0 42%,#f5ab0e 42% 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 6rem;
+  text-transform: uppercase;
+}

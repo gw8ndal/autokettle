@@ -5,41 +5,42 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="../static/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet"> 
         <title>AUTO KETTLE</title>
     </head>
 
     <body>
-        <nav class="navbar">
-            <ul>
-                <li class="title">
-                    <p>AutoKettle</p>
-                </li>
 
-                <li class="sandwich">
-                    <a href="#wrap" id="open">
-                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="34px" height="27px" viewBox="0 0 34 27" enable-background="new 0 0 34 27" xml:space="preserve">
-                            <rect fill="#FFFFFF" width="34" height="4"/>
-                            <rect y="11" fill="#FFFFFF" width="34" height="4"/>
-                            <rect y="23" fill="#FFFFFF" width="34" height="4"/>
-                        </svg>
-                    </a>
-                    <a href="#" id="close">×</a>
-                </li>
-            </ul>
-        </nav>
+        <div class="form-menu">
+            <input type="checkbox" class="toggler">
+            <div class="hamburger"><div></div></div>
+            <div class="form">
+                <div>
+                    <div>
+                <form action="/data" method = "POST">
+                    <p>GPIO pin to use <input type="text" name="GPIO_pin", placeholder="1-40" required=True/></p>
+                    <p>Water temperature<br>30°C<input type="range" min="30" max="100" value="80" name="kettle_temp" id="kettle_temp">100°C</p>
+                    <p>Store data in a file for later use<input type="checkbox" name="filesave_toggle"></p>
+                    <p><input type="submit" value="Submit"/></p>
+                </form>
+                    </div>
+                </div>
+            </div>
 
-            <form action="/data" method = "POST">
-                <p>GPIO pin to use <input type="text" name="GPIO_pin", placeholder="1-40" required=True/></p>
-                <p>Water temperature<br>30°C<input type="range" min="30" max="100" value="80" name="kettle_temp" id="kettle_temp">100°C</p>
-                <p>Store data in a file for later use<input type="checkbox" name="filesave_toggle"></p>
-                <p><input type="submit" value="Submit"/></p>
-            </form>
+        </div>
+
+        <div class="main">
+
+            <p class="title">AutoKettle</p>
 
             <form action="/heat" method="GET">
                 <p><button name="heat_button" type="submit">Heat up</button></p>
             </form>
-            
+
         </div>
+
+            
+            
     </body>
 
 </html>
