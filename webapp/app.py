@@ -57,10 +57,7 @@ def heat():
 @sock.route('/graph')
 def graph(sock):
     data = 30
-    while True:
-        data += 1
+    while data < 100:
+        data += 2
         sock.send(data)
-        time.sleep(2)
-
-if __name__ == '__main__': # Run the server with SocketIO
-    sock.run(app, host='0.0.0.0')
+        time.sleep(1)

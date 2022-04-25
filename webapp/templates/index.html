@@ -25,25 +25,17 @@
             
         </div>
         
-        <div id="graph"></div>
+        <div id="graph">test<br/></div>
 
-        <script>
-            const log = (text) => {
-              document.getElementById('graph').innerHTML += `${text} <br />`;
-            };
-      
-            const socket = new WebSocket('ws://' + location.host + '/graph');
-            socket.addEventListener('message', ev => {
-              log(ev.data);
-            });
-            document.getElementById('form').onsubmit = ev => {
-              ev.preventDefault();
-              const textField = document.getElementById('text');
-              log('>>> ' + textField.value, 'red');
-              socket.send(textField.value);
-              textField.value = '';
-            };
-          </script>
+            <script>
+                // Websocket data
+                const socket = new WebSocket('ws://' + location.host + '/graph');
+                    socket.addEventListener('message', ev => {
+                    document.getElementById('graph').innerHTML = ev.data;
+                    var current_temp = ev.data;
+                });
+            </script>
+
     </body>
 
 </html>
