@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, redirect
-from flask_socketio import SocketIO, send, emit
+from flask_sock import Sock
 import os
+import time
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Hce5-e9kpr8eb7J'
-socketio = SocketIO(app)
+sock = Sock(app)
 
 @app.route('/')
 def index():
@@ -53,10 +54,13 @@ def heat():
     if request.method == 'POST':
         return redirect('/')
 
-
-@socketio.on('send_temp')
-def handle_send(message):
-    send(message)
+@sock.route('/graph')
+def graph(sock):
+    data = 30
+    while True:
+        data += 1
+        sock.send(data)
+        time.sleep(2)
 
 if __name__ == '__main__': # Run the server with SocketIO
-    socketio.run(app, host='0.0.0.0')
+    sock.run(app, host='0.0.0.0')
