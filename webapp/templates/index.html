@@ -18,10 +18,23 @@
                 <div>
                     <div>
                         <form action="/data" method = "POST">
-                            <p>GPIO pin to use <input type="text" name="GPIO_pin", placeholder="1-40" required=True/></p>
-                            <p>Water temperature<br>30°C<input type="range" min="30" max="100" value="80" name="kettle_temp" id="kettle_temp">100°C</p>
-                            <p>Store data in a file for later use<input type="checkbox" name="filesave_toggle"></p>
-                            <p><input type="submit" value="Submit"/></p>
+                            <p>
+                                <span class="form-text">GPIO pin to use</span> 
+                                <span class="form-text"><input type="text" name="GPIO_pin", placeholder="1-40" required=True/></span>
+                            </p>
+                            <p>
+                                <span class="form-text">Water temperature</span>
+                                <span></span><span class="form-text"></span>30°C</span>
+                                <span><input type="range" min="30" max="100" value="80" name="kettle_temp" id="kettle_temp"></span>
+                                <span>100°C</span>
+                            </p>
+                            <p>
+                                <input type="checkbox" name="filesave_toggle" class="data-toggler">
+                                <div class="storage-button"><div>Store data</div></div>
+                            </p>
+                            <p>
+                                <input type="submit" value="Submit"/>
+                            </p>
                         </form>
                     </div>
                 </div>
