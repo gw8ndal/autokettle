@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>AUTO KETTLE</title>
-        <link rel="icon" type="image/x-icon" href="/webapp/imgs/favicon.ico">
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename="imgs/favicon.ico") }}">
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     </head>
 
@@ -15,8 +15,6 @@
             <form action="/data" method = "POST">
                 <p>GPIO pin to use <input type="text" name="GPIO_pin", placeholder="1-40" required=True/></p>
                 <p>Water temperature<br>30°C<input type="range" min="30" max="100" value="80" name="kettle_temp" id="kettle_temp">100°C</p>
-                <p>Store data in a file for later use<input type="checkbox" name="filesave_toggle" checked></p>
-                <h5>Warning : Userdata will be removed if you submit the form without checking the box</h6>
                 <p><input type="submit" value="Submit"/></p>
             </form>
 
@@ -25,25 +23,80 @@
             </form>
             
         </div>
-        <canvas height="300" width="500" id="chart"></canvas>
-        <div id="data_array">liste_temp</div>
-        <div id="graph"></div>
 
-            <script>
-                // Websocket data
-                var data = []
-                const socket = new WebSocket('ws://' + location.host + '/graph');
-                    socket.addEventListener('message', ev => {
-                    document.getElementById('graph').innerHTML = ev.data;
-                    data.push(ev.data)
-                    console.log(data)
-                    document.getElementById('data_array').innerHTML = data;
-                    var current_temp = ev.data;
-                });
-                
-            </script>
-        <div id="chart"></div>
-        <script src="{{ url_for('static', filename="js/chart.js") }}"></script>
+        <div id="temp_data" style="position: fixed; bottom: 0; width: 100%;"></div>
+
+        <script>
+            // Websocket data
+            var data = []
+            const socket = new WebSocket('ws://' + location.host + '/graph');
+                socket.addEventListener('message', ev => {
+                document.getElementById('temp_data').innerHTML = `current temperature: ${ev.data}`;
+                data.push(ev.data)
+                chart.updateSeries([
+                    {
+                        data: data
+                    }
+                ]);
+            });
+        </script>
+
+        <div id="chart" style="position: fixed; bottom: 0; width: 100%;"></div>
+
+        <script>
+            var options = {
+                series: [{
+                    name: 'temperature',
+                    data: data.slice()
+                }],
+                chart: {
+                    height: 200,
+                    type: 'area',
+                    animations: {
+                        easing: 'linear',
+                        dynamicAnimation: {
+                            speed: 1000
+                    }},
+                    toolbar: {
+                        show: false
+                    },
+                    zoom: {
+                        enabled: false
+                }},
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'smooth'
+                },
+                title: {
+                    text: 'Temperature Monitor',
+                    align: 'left'
+                },
+                xaxis: {
+                    range: 10,
+                    tooltip: {
+                        enabled: false
+                    },
+                    labels: {
+                        show: false
+                }}
+            };
+
+            var chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
+
+            window.setInterval(function () {
+                getNewSeries(lastDate, {
+                    min: 10,
+                    max: 90
+                })
+                chart.updateSeries([{
+                    data: data
+                }])
+                }, 1000)
+
+        </script>
     </body>
 
 </html>
