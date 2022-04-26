@@ -9,6 +9,7 @@ sock = Sock(app)
 
 @app.route('/')
 def index():
+    print(os.system('pwd'))
     return render_template('index.html')
 
 @app.route('/data', methods=['GET', 'POST'])
