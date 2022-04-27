@@ -15,25 +15,21 @@
             <input type="checkbox" class="toggler">
             <div class="hamburger"><div></div></div>
             <div class="form">
-                <div>
-                    <div>
-                        <form action="/data" method = "POST">
-                            <p>
-                                <span class="form-text">GPIO pin to use</span> 
-                                <span class="form-text"><input type="text" name="GPIO_pin", placeholder="1-40" required=True/></span>
-                            </p>
-                            <p>
-                                <span class="form-text">Water temperature</span>
-                                <span></span><span class="form-text"></span>30°C</span>
-                                <span><input type="range" min="30" max="100" value="80" name="kettle_temp" id="kettle_temp"></span>
-                                <span>100°C</span>
-                            </p>
-                            <p>
-                                <input type="submit" value="Submit"/>
-                            </p>
-                        </form>
-                    </div>
-                </div>
+                <form action="/data" method = "POST">
+                    <p>
+                        <span class="form-text">GPIO pin to use</span> 
+                        <span class="form-text"><input type="text" name="GPIO_pin", placeholder="1-40" required=True/></span>
+                    </p>
+                    <p>
+                        <span class="form-text">Water temperature</span>
+                        <span></span><span class="form-text"></span>30°C</span>
+                        <span><input type="range" min="30" max="100" value="80" name="kettle_temp" id="kettle_temp"></span>
+                        <span>100°C</span>
+                    </p>
+                    <p>
+                        <input type="submit" value="Submit"/>
+                    </p>
+                </form>
             </div>
 
         </div>
