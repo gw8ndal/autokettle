@@ -23,7 +23,7 @@ def data():
         
         data.raspy_pin = data.req['GPIO_pin']
         data.kettle_temp = data.req['kettle_temp']
-        
+
         userdata_file = open('userdata.txt', 'w+') # Open the userdata file
         userdata_file.writelines([f'{data.raspy_pin},{data.kettle_temp}']) # Write content to the file
         userdata_file.close()

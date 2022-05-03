@@ -4,25 +4,49 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="../static/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet"> 
         <title>AUTO KETTLE</title>
         <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename="imgs/favicon.ico") }}">
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     </head>
 
     <body>
-        <div align=center><h1>AUTO KETTLE</h1>
 
-            <form action="/data" method = "POST">
-                <p>GPIO pin to use <input type="text" name="GPIO_pin", placeholder="1-40" required=True/></p>
-                <p>Water temperature<br>30°C<input type="range" min="30" max="100" value="80" name="kettle_temp" id="kettle_temp">100°C</p>
-                <p><input type="submit" value="Submit"/></p>
-            </form>
+
+        <div class="form-menu">
+            <input type="checkbox" class="toggler">
+            <div class="hamburger"><div></div></div>
+            <div class="form">
+                <form class="form-form" action="/data" method = "POST">
+                    <p class="form-text">
+                        <span class="form-element label">GPIO Pin</span> 
+                        <span class="form-element"><input class="element" type="text" name="GPIO_pin" required=True/></span>
+                    </p>
+                    <p class="form-text">
+                        <span class="form-element label">Water temperature</span>
+                            <input class="water-range" type="range" value="80" min="30" max="100" oninput="this.nextElementSibling.value = this.value" name="kettle_temp" id="kettle_temp">
+                            <output>80</output>°C  
+                        </span>
+                    </p>
+                    <p class="form-text">
+                        <input class="submit-button element" type="submit" value="Submit"/>
+                    </p>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="main">
+
+            <p class="title">AutoKettle</p>
 
             <form action="/heat" method="GET">
-                <p><button name="heat_button" type="submit">Heat up the kettle</button></p>
+                <button name="heat_button" type="submit" class="heat_button">Heat up</button>
             </form>
-            
+
         </div>
+            
 
         <div id="temp_data" style="position: fixed; bottom: 0; width: 100%;"></div>
 
