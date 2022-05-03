@@ -73,13 +73,6 @@
                     name: 'temperature',
                     data: data.slice()
                 }],
-                theme: {
-                    monochrome: {
-                        enabled: true,
-                        color: '#255aee',
-                        shadeTo: 'light',
-                        shadeIntensity: 0.65
-                }},
                 chart: {
                     height: 200,
                     type: 'line',
@@ -98,10 +91,11 @@
                     enabled: false
                 },
                 stroke: {
-                    curve: 'smooth'
+                    curve: 'smooth',
+                    colors: '#f5ab0e'
                 },
                 xaxis: {
-                    range: 10,
+                    range: 20,
                     tooltip: {
                         enabled: false
                     },
@@ -111,13 +105,9 @@
                 yaxis: {
                     show: true,
                     labels: {
-                        show: true,
                         style: {
-                            colors: ['#fffff'],
-                        },
-                        formatter: (value) => { return val },
-                    },
-                }
+                            colors: '#ffffff',
+                }}}
             };
 
             var chart = new ApexCharts(document.querySelector("#chart"), options);
