@@ -5,26 +5,29 @@ import sys
 # Use standard pinout
 GPIO.setmode(GPIO.BOARD)
 
-def testing(pin, temp):
+def heat(pin, temp):
     """
-    Function used to test the output of a GPIO pin
-    pin : the GPIO pin on the raspberry pi
-    temp : wanted temperature (TBD)
+    Function used to start heating the kettle
+    pin : the GPIO pin on the raspberry pi plugged to the relay
+    temp : wanted temperature (Waiting for temperature sensor)
     """
-    assert 0 < pin <= 40
-    while True:
+
+    assert 0 < pin <= 40, 'Pin number must be between 1 and 40'
+    
+    print(f'Running on pin {pin} and target temperature {temp}°C')
+    
+    GPIO.setup(pin, GPIO.OUT)
+    
+    n = 0
+    
+    print('Kettle engaged')
+    while n < temp:
         GPIO.setup(pin, GPIO.OUT)
-        
         # Enable GPIO 25
         GPIO.output(pin, True)
-        print('on')
-        
-        time.sleep(10)
-        
-        # Disable GPIO 25
-        GPIO.output(pin, False)
-        print('off')
-        
-        GPIO.cleanup()
+        time.sleep(2)
+        n += 1 # Simulate temperature increasing
+    print('Kettle disengaged')
+    GPIO.cleanup()
 
-testing(int(sys.argv[1]), int(sys.argv[2]))
+heat(int(sys.argv[1]), int(sys.argv[2]))

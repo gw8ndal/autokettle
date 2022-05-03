@@ -1,10 +1,17 @@
 from flask import Flask, render_template, request, redirect
+from flask_sock import Sock
 import os
+import time
+from w1thermsensor import W1ThermSensor
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'Hce5-e9kpr8eb7J'
+sock = Sock(app)
+sensor = W1ThermSensor()
 
 @app.route('/')
 def index():
+    print(os.system('pwd'))
     return render_template('index.html')
 
 @app.route('/data', methods=['GET', 'POST'])
@@ -36,10 +43,17 @@ def heat():
             os.system(f'python ../kettle_script.py {userdata_list[0]} {userdata_list[1]}')
 
         except: # Run program without the data file, directly from the form
-            print('sans fichier')
+            
+            print('Running without the userdata file...')
 
             os.system(f'python ../kettle_script.py {data.raspy_pin} {data.kettle_temp}')
 
         return redirect('/')
     if request.method == 'POST':
         return redirect('/')
+
+@sock.route('/graph')
+def graph(sock):
+    while True:
+        sock.send(sensor.get_temperature())
+        time.sleep(1)
