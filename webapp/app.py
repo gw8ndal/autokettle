@@ -2,12 +2,12 @@ from flask import Flask, render_template, request, redirect
 from flask_sock import Sock
 import os
 import time
-from w1thermsensor import W1ThermSensor
+# from w1thermsensor import W1ThermSensor
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Hce5-e9kpr8eb7J'
 sock = Sock(app)
-sensor = W1ThermSensor()
+# sensor = W1ThermSensor()
 
 @app.route('/')
 def index():
@@ -55,5 +55,6 @@ def heat():
 @sock.route('/graph')
 def graph(sock):
     while True:
-        sock.send(sensor.get_temperature())
+        import random
+        sock.send(random.randint(30, 100))
         time.sleep(1)

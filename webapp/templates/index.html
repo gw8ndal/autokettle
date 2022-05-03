@@ -48,7 +48,7 @@
         </div>
             
 
-        <div id="temp_data" style="position: fixed; bottom: 0; width: 100%;"></div>
+        <div class="graph" id="temp_data" style="position: fixed; bottom: 0; width: 100%;"></div>
 
         <script>
             // Websocket data
@@ -65,7 +65,7 @@
             });
         </script>
 
-        <div id="chart" style="position: fixed; bottom: 0; width: 100%;"></div>
+        <div class="temperature" id="chart" style="position: fixed; bottom: 0; width: 100%;"></div>
 
         <script>
             var options = {
@@ -75,7 +75,7 @@
                 }],
                 chart: {
                     height: 200,
-                    type: 'area',
+                    type: 'line',
                     animations: {
                         easing: 'linear',
                         dynamicAnimation: {
@@ -92,10 +92,6 @@
                 },
                 stroke: {
                     curve: 'smooth'
-                },
-                title: {
-                    text: 'Temperature Monitor',
-                    align: 'left'
                 },
                 xaxis: {
                     range: 10,
