@@ -2,12 +2,12 @@ from flask import Flask, render_template, request, redirect
 from flask_sock import Sock
 import os
 import time
-# from w1thermsensor import W1ThermSensor
+from w1thermsensor import W1ThermSensor
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Hce5-e9kpr8eb7J'
 sock = Sock(app)
-# sensor = W1ThermSensor()
+sensor = W1ThermSensor()
 
 @app.route('/')
 def index():
@@ -39,14 +39,16 @@ def heat():
             userdata_file = open('userdata.txt', 'r')
             userdata_list = userdata_file.read().split(',')
             print(f'Data in the file : {userdata_list}')
-
-            os.system(f'python ../kettle_script.py {userdata_list[0]} {userdata_list[1]}')
+            
+            while graph.sensor_temp <= userdata_list[1]:
+                os.system(f'python ../kettle_script.py {userdata_list[0]} {userdata_list[1]}')
 
         except: # Run program without the data file, directly from the form
             
             print('Running without the userdata file...')
 
-            os.system(f'python ../kettle_script.py {data.raspy_pin} {data.kettle_temp}')
+            while graph.sensor_temp <= userdata_list[1]:
+                os.system(f'python ../kettle_script.py {data.raspy_pin} {data.kettle_temp}')
 
         return redirect('/')
     if request.method == 'POST':
@@ -55,6 +57,6 @@ def heat():
 @sock.route('/graph')
 def graph(sock):
     while True:
-        import random
-        sock.send(random.randint(30, 100))
-        time.sleep(1)
+        graph.sensor_temp = sensor.get_temperature()
+        sock.send(graph.sensor_temp)
+        time.sleep(0.4)
