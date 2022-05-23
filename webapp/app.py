@@ -3,11 +3,15 @@ from flask_sock import Sock
 import os
 import time
 from w1thermsensor import W1ThermSensor
+import RPi.GPIO as GPIO
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Hce5-e9kpr8eb7J'
 sock = Sock(app)
 sensor = W1ThermSensor()
+
+# Use standard pinout
+GPIO.setmode(GPIO.BOARD)
 
 @app.route('/')
 def index():
@@ -41,14 +45,14 @@ def heat():
             print(f'Data in the file : {userdata_list}')
             
             while graph.sensor_temp <= userdata_list[1]:
-                os.system(f'python ../kettle_script.py {userdata_list[0]} {userdata_list[1]}')
+                missile_launcher({userdata_list[0]} {userdata_list[1]})
 
         except: # Run program without the data file, directly from the form
             
             print('Running without the userdata file...')
 
             while graph.sensor_temp <= userdata_list[1]:
-                os.system(f'python ../kettle_script.py {data.raspy_pin} {data.kettle_temp}')
+                missile_launcher({data.raspy_pin} {data.kettle_temp})
 
         return redirect('/')
     if request.method == 'POST':
@@ -60,3 +64,26 @@ def graph(sock):
         graph.sensor_temp = sensor.get_temperature()
         sock.send(graph.sensor_temp)
         time.sleep(0.4)
+
+def missile_launcher(pin, temp):
+    """
+    Function used to start heating the kettle
+    pin : the GPIO pin on the raspberry pi plugged to the relay
+    temp : wanted temperature (Waiting for temperature sensor)
+    """
+
+    print(f'Running on pin {pin} and target temperature {temp}°C')
+    
+    GPIO.setup(pin, GPIO.OUT)
+    
+    n = 0
+    
+    print('Kettle engaged')
+
+    GPIO.setup(pin, GPIO.OUT)
+    # Enable GPIO 25
+    GPIO.output(pin, True)
+    time.sleep(2)
+    n += 1 # Simulate temperature increasing
+    print('Kettle disengaged')
+    GPIO.cleanup()
