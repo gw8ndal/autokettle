@@ -1,6 +1,9 @@
 import RPi.GPIO as GPIO
 import time
 import sys
+from webapp/app import send_temp
+
+sensor = W1ThermSensor()
 
 # Use standard pinout
 GPIO.setmode(GPIO.BOARD)
@@ -21,12 +24,11 @@ def heat(pin, temp):
     n = 0
     
     print('Kettle engaged')
-    while n < temp:
+    while send_temp(sensor) < temp:
         GPIO.setup(pin, GPIO.OUT)
         # Enable GPIO 25
         GPIO.output(pin, True)
-        time.sleep(2)
-        n += 1 # Simulate temperature increasing
+        time.sleep(1)
     print('Kettle disengaged')
     GPIO.cleanup()
 
