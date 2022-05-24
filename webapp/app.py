@@ -82,6 +82,7 @@ def missile_launcher(pin, temp):
     
     print('Kettle engaged')
     print(f'current temp : {graph.sensor_temp}')
+    graph(sock)
     GPIO.setup(pin, GPIO.OUT)
     # Enable GPIO 25
     GPIO.output(pin, True)
