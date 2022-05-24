@@ -44,14 +44,14 @@ def heat():
             userdata_list = userdata_file.read().split(',')
             print(f'Data in the file : {userdata_list}')
             
-            while graph.sensor_temp <= userdata_list[1]:
+            while graph.sensor_temp <= int(userdata_list[1]):
                 missile_launcher({userdata_list[0]}, {userdata_list[1]})
 
         except: # Run program without the data file, directly from the form
             
             print('Running without the userdata file...')
 
-            while graph.sensor_temp <= userdata_list[1]:
+            while graph.sensor_temp <= int(userdata_list[1]):
                 missile_launcher({data.raspy_pin}, {data.kettle_temp})
 
         return redirect('/')
