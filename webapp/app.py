@@ -52,7 +52,7 @@ def heat():
             print('Running without the userdata file...')
 
             while graph.sensor_temp <= int(userdata_list[1]):
-                missile_launcher(data.raspy_pin, data.kettle_temp)
+                missile_launcher(int(data.raspy_pin), int(data.kettle_temp))
 
         return redirect('/')
     if request.method == 'POST':
