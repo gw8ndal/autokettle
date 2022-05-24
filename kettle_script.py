@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 import sys
-from webapp/app import send_temp
+from webapp.app import send_temp
 
 sensor = W1ThermSensor()
 
