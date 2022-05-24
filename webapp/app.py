@@ -72,6 +72,8 @@ def missile_launcher(pin, temp):
     temp : wanted temperature (Waiting for temperature sensor)
     """
 
+    # Use standard pinout
+    GPIO.setmode(GPIO.BOARD)
     print(f'Running on pin {pin} and target temperature {temp}°C')
     
     GPIO.setup(pin, GPIO.OUT)
