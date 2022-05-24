@@ -47,13 +47,13 @@ def heat():
             userdata_list = userdata_file.read().split(',')
             print(f'Data in the file : {userdata_list}')
             
-            os.system(f'../kettle_script.py {userdata_list[0]} {userdata_list[1]}')
+            os.system(f'python ../kettle_script.py {userdata_list[0]} {userdata_list[1]}')
 
         except: # Run program without the data file, directly from the form
             
             print('Running without the userdata file...')
 
-            os.system(f'../kettle_script.py {data.raspy_pin} {data.kettle_temp}')
+            os.system(f'python ../kettle_script.py {data.raspy_pin} {data.kettle_temp}')
 
         return redirect('/')
     if request.method == 'POST':
