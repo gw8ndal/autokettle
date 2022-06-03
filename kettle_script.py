@@ -26,10 +26,8 @@ def heat(pin, temp):
     
     print('Kettle engaged')
     while send_temp(sensor) < temp:
-        GPIO.setup(pin, GPIO.OUT)
-        # Enable GPIO 25
+        # Enable GPIO relay switch
         GPIO.output(pin, True)
-        time.sleep(1)
     print('Kettle disengaged')
     GPIO.cleanup()
 

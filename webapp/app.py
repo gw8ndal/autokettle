@@ -63,5 +63,5 @@ def heat():
 def graph(sock):
     while True:
         graph.sensor_temp = sensor.get_temperature()
-        sock.send(graph.sensor_temp)
+        sock.send(graph.sensor_temp) # Send temperature to the graph via a websocket
         time.sleep(0.4)
