@@ -1,8 +1,13 @@
 # autokettle
-Instructions on how to automate a kettle with a Raspberry PI.
+Computer Science project to automate a kettle.
 
 # Instructions
 
-### 1. Locate the pins you want to use
+## Markdown
+- [In French](Instructions/Markdown/Instructions_fr.md)
+- [In English](Instructions/Markdown/Instructions_en.md)
+  
+## PDF
 
-<img src="images/pinout.png" alt="Raspberry Pi Pinout" style="width:200px;">
+- [In French](Instructions/PDF/Instructions_fr.pdf)
+- [In English](Instructions/PDF/Instructions_en.pdf)
