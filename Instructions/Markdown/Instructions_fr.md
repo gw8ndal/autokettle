@@ -39,7 +39,7 @@ GND -> Port 9
 
 ### 1.3 - Schéma
 
-<img src="images/pinout.png" alt="Schéma du Raspberry" width="300" height="450" align="center"/>
+<img src="../../images/pinout.png" alt="Schéma du Raspberry" width="300" height="450" align="center"/>
 
 ---
 
